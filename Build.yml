@@ -1,0 +1,68 @@
+name: Build EaglecraftX 1.8.8
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Check Java
+        run: java -version
+
+      - name: Check repository
+        run: |
+          echo "Repository contents:"
+          find . -maxdepth 3 -type f | sort
+
+      - name: Build client
+        shell: bash
+        run: |
+          set -e
+
+          if [ -f "./CompileLatestClient.sh" ]; then
+            chmod +x ./CompileLatestClient.sh
+            ./CompileLatestClient.sh
+          elif [ -f "./CompileLatestClient.bat" ]; then
+            echo "Windows build script detected."
+            echo "Use the Linux/macOS build script in this repository."
+            exit 1
+          else
+            echo "ERROR: EaglercraftX source files were not found."
+            echo ""
+            echo "Your repository currently needs the"
+            echo "EaglercraftX 1.8.8 source before it can build."
+            exit 1
+          fi
+
+      - name: Find generated client
+        shell: bash
+        run: |
+          echo "Looking for generated client files..."
+
+          find . \
+            -type f \
+            \( -name "*.html" \
+            -o -name "*.js" \
+            -o -name "*.epk" \) \
+            | sort
+
+      - name: Upload client
+        uses: actions/upload-artifact@v4
+        with:
+          name: EaglecraftX-1.8.8
+          path: |
+            **/*.html
+            **/*.js
+            **/*.epk
+          if-no-files-found: error
