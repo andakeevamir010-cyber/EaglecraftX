@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width,
+                 initial-scale=1.0,
+                 maximum-scale=1.0,
+                 user-scalable=no,
+                 viewport-fit=cover"
+    >
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <title>EaglecraftX 1.8.8</title>
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+        }
+
+        #game {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background: #000;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            touch-action: none;
+        }
+
+        #ipadMenu {
+            position: fixed;
+            top: env(safe-area-inset-top, 10px);
+            right: 10px;
+            z-index: 99999;
+
+            display: flex;
+            gap: 8px;
+
+            font-family: Arial, sans-serif;
+        }
+
+        #ipadMenu button {
+            border: 0;
+            border-radius: 8px;
+            padding: 9px 12px;
+
+            background: rgba(0,0,0,.75);
+            color: white;
+
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        #ipadMenu button:active {
+            transform: scale(.96);
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        #packInput {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="game"></div>
+
+<div id="ipadMenu">
+    <button onclick="EagleIPAD.fullscreen()">Fullscreen</button>
+    <button onclick="EagleIPAD.importSkin()">Skin</button>
+    <button onclick="EagleIPAD.importPack()">Texture Pack</button>
+</div>
+
+<input
+    id="fileInput"
+    type="file"
+    accept=".png,image/png"
+>
+
+<input
+    id="packInput"
+    type="file"
+    accept=".zip,application/zip"
+>
+
+<script src="ipad-client.js"></script>
+
+<!--
+    Your compiled EaglercraftX 1.8.8 client
+    will be loaded here after we build it.
+-->
+
+</body>
+</html>
