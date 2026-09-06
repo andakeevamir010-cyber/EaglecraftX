@@ -22,4 +22,10 @@ The WASM-GC client uses a custom fork of TeaVM, the source is available [here](h
 
 Run the `StartDesktopRuntime` script in the "target_lwjgl_desktop" folder (or the `eaglercraftDebugRuntime` Gradle task in your IDE) to run the desktop runtime. This will run the client using the [...]
 
-To debug the desktop runtime from your IDE, one way you can do it is by enabling the debugger in the LWJGL target's `eaglercraftDebugRuntime` task, but something that will launch even [...]
+Do not use the desktop runtime as substitute for testing you client in a browser, client developers who only test their client on the desktop runtime usually end up with lots of unexpected bugs an[...]
+
+**To debug the desktop runtime:**
+
+If you want to debug the desktop runtime from your IDE, one way you can do it is by enabling the debugger in the LWJGL target's `eaglercraftDebugRuntime` task, but something that will launch even [...]
+
+You can do this by creating a run configuration specifying `net.lax1dude.eaglercraft.v1_8.internal.lwjgl.MainClass` as the main class, the `desktopRuntime` folder as the working directory, `-Xmx1G[...]
